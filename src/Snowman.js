@@ -61,6 +61,7 @@ function Snowman(props) {
   function generateButtons() {
     return "abcdefghijklmnopqrstuvwxyz".split("").map(ltr => (
         <button
+            className={nWrong >= props.maxWrong ? "hidden" : ""}
             key={ltr}
             value={ltr}
             onClick={handleGuess}
@@ -70,6 +71,7 @@ function Snowman(props) {
         </button>
     ));
   }
+  
 
   /** render: render game */
   return (
@@ -78,6 +80,7 @@ function Snowman(props) {
         <p>Number wrong: {nWrong}</p>
         <p className="Snowman-word">{guessedWord()}</p>
         <p>{generateButtons()}</p>
+        <p className={nWrong > props.maxWrong ? "hidden" : ""}>You lose. Correct Word was: "apple"</p>
       </div>
   );
 }
