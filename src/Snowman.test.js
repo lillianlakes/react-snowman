@@ -29,16 +29,24 @@ it('does not allow players to keep guessing after the game is over', function() 
 
 it("matches snapshot", function() {
   const { container } = render(<Snowman />);
-  const tooManyWrongGuesses = new Set();
-  const alpha = "abcdefghijklmnopqrstuvwxyz";
+  
+  fireEvent.click(container.querySelectorAll('button')[1]);
+  fireEvent.click(container.querySelectorAll('button')[2]);
+  fireEvent.click(container.querySelectorAll('button')[3]);
+  fireEvent.click(container.querySelectorAll('button')[5]);
+  fireEvent.click(container.querySelectorAll('button')[6]);
+  fireEvent.click(container.querySelectorAll('button')[7]);
 
-  for (let i = 0; tooManyWrongGuesses.size <= Snowman.defaultProps.maxWrong + 1; i++ ) {
-    if (!"apple".includes(alpha[i])) {
-      tooManyWrongGuesses.add(alpha[i]);
-    }
-  } 
-  
-  Snowman.setGuessedLetters(tooManyWrongGuesses);
-  
   expect(container).toMatchSnapshot();
 });
+
+// const tooManyWrongGuesses = new Set();
+// const alpha = "abcdefghijklmnopqrstuvwxyz";
+
+// for (let i = 0; tooManyWrongGuesses.size <= Snowman.defaultProps.maxWrong + 1; i++ ) {
+//   if (!"apple".includes(alpha[i])) {
+//     tooManyWrongGuesses.add(alpha[i]);
+//   }
+// } 
+
+// Snowman.setGuessedLetters(tooManyWrongGuesses);
